@@ -8,7 +8,9 @@
         <classes>
             <class name = "tests.ExampleTest">
                 <methods>
-                    <include name="T0001_Example"/>
+                    <include name="T0001_Example">
+                        <parameter name = "FileLocalPath" value="files/file.txt"/>
+                    </include>
                 </methods>
             </class>
         </classes>
