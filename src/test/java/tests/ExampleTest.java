@@ -1,11 +1,9 @@
 package tests;
 
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.ExamplePage;
-import utilitys.Driver;
 
 public class ExampleTest extends BaseTest {
     ExamplePage examplePage;
@@ -16,7 +14,9 @@ public class ExampleTest extends BaseTest {
     }
 
     @Test
-    public void T0001_Example() {
-
+    @Parameters("FileLocalPath")
+    public void T0001_Example(String fileLocalPath) {
+        examplePage.UploadFile(fileLocalPath);
+        examplePage.assertUploadFile(fileLocalPath);
     }
 }

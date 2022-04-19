@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
-import java.util.Map;
 
 public class Driver {
     private static Driver single_api = null;
@@ -13,8 +12,6 @@ public class Driver {
     private static String URI;
 
     private Driver(String URI, String browser) {
-        this.URI = URI;
-
         if((browser.equals("CHROME"))) {
             System.setProperty("webdriver.chrome.driver", "C:\\selenium_drivers\\chromedriver.exe");
             ChromeOptions opt = new ChromeOptions();
@@ -30,15 +27,20 @@ public class Driver {
         if (single_api == null)
             single_api = new Driver(URI, browser);
 
-        if(!URI.equals(single_api.URI))
-            single_api.URI = URI;
+        if(!URI.equals(Driver.URI))
+            Driver.URI = URI;
 
-        single_api.webdriver.navigate().to(single_api.URI);
+        webdriver.navigate().to(URI);
 
         return single_api;
     }
 
     public WebDriver getWebdriver() {
         return webdriver;
+    }
+
+    public void closeDriver() {
+        getWebdriver().close();
+        getWebdriver().quit();
     }
 }
