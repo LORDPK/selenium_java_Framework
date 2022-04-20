@@ -12,6 +12,7 @@
                         <parameter name = "FileLocalPath" value="files/file.txt"/>
                     </include>
                     <include name="T0002_ExampleSendKeyAndClick"/>
+                    <include name="T0003_ExampleSelectElement"/>
                 </methods>
             </class>
         </classes>

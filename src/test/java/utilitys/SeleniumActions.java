@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -57,5 +58,16 @@ public class SeleniumActions {
         WebElement element = webDriver.findElement(locator);
 
         return element.isEnabled();
+    }
+
+    /**
+     * Set value to a Select Element
+     * @param locator Select Element
+     * @param visibleText Text to set value
+     */
+    public void setElementFromSelectElement(By locator, String visibleText) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        Select selectElement = new Select(webDriver.findElement(locator));
+        selectElement.selectByVisibleText(visibleText);
     }
 }

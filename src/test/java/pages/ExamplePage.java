@@ -9,6 +9,7 @@ public class ExamplePage extends BasePage {
     private final By uploadPhoto = By.cssSelector("input[name='photo']");
     private final By inputFirstName = By.cssSelector("input[name='firstname']");
     private final By sexFemaleRadioButton = By.cssSelector("input[name='sex'][value='Female']");
+    private final By selectContinent = By.cssSelector("select[name='continents']");
 
     public ExamplePage(Driver driver) {
         super(driver);
@@ -33,9 +34,19 @@ public class ExamplePage extends BasePage {
         selenium.clickElement(sexFemaleRadioButton);
     }
 
+
+    public void selectSouthAmericaContinent() {
+       selenium.setElementFromSelectElement(selectContinent, "South America");
+    }
+
     public void assertFirstNameInputCorrectly(String Name) {
         String inputNameValue = selenium.getElementValue(inputFirstName);
         Assert.assertEquals(Name, inputNameValue, "Error, Name is not correctly informed.");
+    }
+
+    public void assertContinentSouthAmerica() {
+        String elementValue = selenium.getElementValue(selectContinent);
+        Assert.assertEquals(elementValue, "South America", "Error, South America is not selected.");
     }
 
     public void assertFemaleSelected() {

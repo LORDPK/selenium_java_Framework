@@ -25,6 +25,7 @@ public class ExampleTest extends BaseTest {
         examplePage.UploadFile(fileLocalPath);
         examplePage.assertUploadFile(fileLocalPath);
     }
+
     @Test
     public void T0002_ExampleSendKeyAndClick() {
         String example = "Example";
@@ -32,5 +33,11 @@ public class ExampleTest extends BaseTest {
         examplePage.informFirstName(example);
         examplePage.assertFemaleSelected();
         examplePage.assertFirstNameInputCorrectly(example);
+    }
+
+    @Test
+    public void T0003_ExampleSelectElement() {
+        examplePage.selectSouthAmericaContinent();
+        examplePage.assertContinentSouthAmerica();
     }
 }
