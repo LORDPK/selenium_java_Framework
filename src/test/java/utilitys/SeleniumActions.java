@@ -2,6 +2,7 @@ package utilitys;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -20,28 +21,41 @@ public class SeleniumActions {
     }
 
     /**
-     * Add a file to input file field
-     * @param locator input file element Locator
-     * @param fileLocalPath path from the file to add to the input field
+     * Click element
+     * @param locator element to click Locator
      */
-    public void addFileInputField(By locator, String fileLocalPath) {
-        String path = FileManager.getAbsolutePathFromRelativePath(fileLocalPath);
-
+    public void clickElement(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
-        webDriver.findElement(locator).sendKeys(path);
+        webDriver.findElement(locator).click();
     }
 
     /**
-     * Evaluate if the file was correctly added to the input file
-     * @param locator input file element Locator
-     * @param fileLocalPath path from the file added to the input field
+     * input text in a element
+     * @param locator element to input text locator
+     * @param text text to input
      */
-    public void evaluateCorrectlyInputFile(By locator, String fileLocalPath) {
-        String valueExpected = FileManager.getFileName(fileLocalPath);
-
+    public void sendKeyElement(By locator, String text) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        String elementValue = webDriver.findElement(locator).getAttribute("value");
+        webDriver.findElement(locator).sendKeys(text);
+    }
 
-        Asserts.assertStringContainsString(elementValue, valueExpected);
+    /**
+     * Evaluate value of a element
+     * @param locator element Locator to recover value
+     */
+    public String getElementValue(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return webDriver.findElement(locator).getAttribute("value");
+    }
+
+    /**
+     * Return enabled State
+     * @param locator element to get enable state
+     */
+    public boolean getEnableStateElement(By locator) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = webDriver.findElement(locator);
+
+        return element.isEnabled();
     }
 }

@@ -8,9 +8,10 @@
         <classes>
             <class name = "tests.ExampleTest">
                 <methods>
-                    <include name="T0001_Example">
+                    <include name="T0001_ExampleFileUpload">
                         <parameter name = "FileLocalPath" value="files/file.txt"/>
                     </include>
+                    <include name="T0002_ExampleSendKeyAndClick"/>
                 </methods>
             </class>
         </classes>
