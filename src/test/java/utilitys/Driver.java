@@ -16,7 +16,7 @@ public class Driver {
             System.setProperty("webdriver.chrome.driver", "C:\\selenium_drivers\\chromedriver.exe");
             ChromeOptions opt = new ChromeOptions();
             opt.addArguments("--no-sandbox");
-            opt.addArguments("headless");
+            //opt.addArguments("headless");
             webdriver = new ChromeDriver(opt);
             webdriver.manage().window().maximize();
             webdriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));

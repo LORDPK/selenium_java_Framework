@@ -11,11 +11,11 @@ public class ExamplePage extends BasePage {
     }
 
     public void UploadFile(String fileLocalPath) {
-        addFileToField(uploadPhoto, fileLocalPath);
+        selenium.addFileInputField(uploadPhoto, fileLocalPath);
     }
 
     public void assertUploadFile(String fileLocalPath) {
-        assertCorrectAddFile(uploadPhoto, fileLocalPath);
+        selenium.evaluateCorrectlyInputFile(uploadPhoto, fileLocalPath);
     }
 
 }
