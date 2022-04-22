@@ -16,7 +16,7 @@ public class Driver {
             System.setProperty("webdriver.chrome.driver", "C:\\selenium_drivers\\chromedriver.exe");
             ChromeOptions opt = new ChromeOptions();
             opt.addArguments("--no-sandbox");
-            opt.addArguments("headless");
+            opt.addArguments("--incognito");
             webdriver = new ChromeDriver(opt);
             webdriver.manage().window().maximize();
             webdriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
@@ -30,13 +30,15 @@ public class Driver {
         if(!URI.equals(Driver.URI))
             Driver.URI = URI;
 
-        webdriver.navigate().to(URI);
-
         return single_api;
     }
 
     public WebDriver getWebdriver() {
         return webdriver;
+    }
+
+    public void goToURI() {
+        webdriver.navigate().to(URI);
     }
 
     public void closeDriver() {
