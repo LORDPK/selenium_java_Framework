@@ -6,16 +6,19 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
 import java.time.Duration;
 
+/**
+ * Class for all the actions that uses Selenium WebDriver for Browser Interactions.
+ * Examples: Click Element, Move to Element, Select element from List, etc.
+ */
 public class SeleniumActions {
-    private Driver driver;
-    private WebDriver webDriver;
-    private WebDriverWait wait;
-    private Actions actions;
+    private final Driver driver;
+    private final WebDriver webDriver;
+    private final WebDriverWait wait;
+    private final Actions actions;
     private final java.time.Duration TIMEOUT = Duration.ofSeconds(30);//TODO Move this to a constants class
-    private final long WAITSHORTTIME = 5000;//TODO Move this to a constants class
+    private final long WAITSHORTTIME = 1000;//TODO Move this to a constants class
     private final long REINTENTLIMIT = 50;//TODO Move this to a constants class
 
     public SeleniumActions(Driver driver) {
@@ -90,7 +93,7 @@ public class SeleniumActions {
      */
     public void ChangeIframe(String iframe) {
         if(iframe.isEmpty()) {
-            this.webDriver.switchTo().defaultContent();
+            this.ChangeDefaultContent();
         }
         else {
             this.webDriver.switchTo().frame(iframe);
@@ -98,7 +101,15 @@ public class SeleniumActions {
     }
 
     /**
-     * Move cursor to element present in the page
+     * Return to default Content
+     */
+    public void ChangeDefaultContent() {
+            this.webDriver.switchTo().defaultContent();
+    }
+
+    /**
+     * Scroll down to element on screen,
+     * Use this method when element doesn't exist on screen at the moment of execution
      * @param locator Select Element
      */
     public boolean scrollDownUntilElementOnScreen(By locator) {
@@ -108,7 +119,7 @@ public class SeleniumActions {
         while(!elementVisible)
         {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(WAITSHORTTIME);
                 this.webDriver.findElement(locator).click();
                 elementVisible = true;
             }

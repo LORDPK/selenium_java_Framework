@@ -1,6 +1,9 @@
 package utilitys;
 import java.io.File;
 
+/**
+ * Class for all the File functions, like open file, copy file, read information from file, delete file, etc.
+ */
 public class FileManager {
 
     /**

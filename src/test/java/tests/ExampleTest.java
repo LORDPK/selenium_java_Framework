@@ -43,7 +43,7 @@ public class ExampleTest extends BaseTest {
 
     @Test
     public void T0004_ExampleScrollDownUntilElementScreen() {
-        driver.getWebdriver().navigate().to("https://markheath.net/post/simple-tables-with-css-grid-layout");
+        driver.goToURL("https://markheath.net/post/simple-tables-with-css-grid-layout");
         examplePage.assertAnotherDescription();
     }
 }
