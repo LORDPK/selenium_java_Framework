@@ -1,24 +1,28 @@
 package utilitys;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
 import java.time.Duration;
 
 public class SeleniumActions {
     private Driver driver;
     private WebDriver webDriver;
     private WebDriverWait wait;
-    private final java.time.Duration TIMEOUT = Duration.ofSeconds(60);//TODO Move this to a constants class
+    private Actions actions;
+    private final java.time.Duration TIMEOUT = Duration.ofSeconds(30);//TODO Move this to a constants class
+    private final long WAITSHORTTIME = 5000;//TODO Move this to a constants class
+    private final long REINTENTLIMIT = 50;//TODO Move this to a constants class
 
     public SeleniumActions(Driver driver) {
         this.driver = driver;
         this.webDriver = driver.getWebdriver();
         wait = new WebDriverWait(this.webDriver, TIMEOUT);
+        this.actions = new Actions(this.webDriver);
     }
 
     /**
@@ -69,5 +73,58 @@ public class SeleniumActions {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         Select selectElement = new Select(webDriver.findElement(locator));
         selectElement.selectByVisibleText(visibleText);
+    }
+
+    /**
+     * Move cursor to element present in the page then click on it
+     * @param locator Select Element
+     */
+    public void moveToElementAndClickIt(By locator) {
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        this.actions.moveToElement(webElement).click().build().perform();
+    }
+
+    /**
+     * Change iframe, if iframe is empty change to default content
+     * @param iframe Iframe name or ID
+     */
+    public void ChangeIframe(String iframe) {
+        if(iframe.isEmpty()) {
+            this.webDriver.switchTo().defaultContent();
+        }
+        else {
+            this.webDriver.switchTo().frame(iframe);
+        }
+    }
+
+    /**
+     * Move cursor to element present in the page
+     * @param locator Select Element
+     */
+    public boolean scrollDownUntilElementOnScreen(By locator) {
+        boolean elementVisible = false;
+        int reIntent = 0;
+
+        while(!elementVisible)
+        {
+            try {
+                Thread.sleep(1000);
+                this.webDriver.findElement(locator).click();
+                elementVisible = true;
+            }
+            catch(Exception Ex) {
+                reIntent++;
+            }
+
+            if(!elementVisible) {
+                this.actions.sendKeys(Keys.PAGE_DOWN).perform();
+            }
+
+            if(reIntent > REINTENTLIMIT) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
