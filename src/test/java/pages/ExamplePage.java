@@ -10,6 +10,7 @@ public class ExamplePage extends BasePage {
     private final By inputFirstName = By.cssSelector("input[name='firstname']");
     private final By sexFemaleRadioButton = By.cssSelector("input[name='sex'][value='Female']");
     private final By selectContinent = By.cssSelector("select[name='continents']");
+    private final By alertButton = By.cssSelector("button[name='submit']");
 
     public ExamplePage(Driver driver) {
         super(driver);
@@ -34,6 +35,9 @@ public class ExamplePage extends BasePage {
         selenium.clickElement(sexFemaleRadioButton);
     }
 
+    public void clickAlertButton() {
+        selenium.clickElement(alertButton);
+    }
 
     public void selectSouthAmericaContinent() {
        selenium.setElementFromSelectElement(selectContinent, "South America");

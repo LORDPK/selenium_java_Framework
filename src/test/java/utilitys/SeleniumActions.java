@@ -1,5 +1,6 @@
 package utilitys;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -69,5 +70,29 @@ public class SeleniumActions {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         Select selectElement = new Select(webDriver.findElement(locator));
         selectElement.selectByVisibleText(visibleText);
+    }
+
+    /**
+     * Accept or Dismiss a Alert Depending on parameter value
+     * @param acceptAlert Boolean parameter, if is true then accept the alert else dismiss it
+     */
+    public void acceptDismissAlert(boolean acceptAlert) {
+        Alert a = wait.until(ExpectedConditions.alertIsPresent());
+        if(acceptAlert) {
+            this.webDriver.switchTo().alert().accept();
+        }
+        else {
+            this.webDriver.switchTo().alert().dismiss();
+        }
+    }
+
+    /**
+     * Recover the text description in the alert on screen
+     * @return Alert text description
+     */
+    public String recoverTextAlert() {
+        Alert a = wait.until(ExpectedConditions.alertIsPresent());
+        this.webDriver.switchTo().alert();
+        return a.getText();
     }
 }

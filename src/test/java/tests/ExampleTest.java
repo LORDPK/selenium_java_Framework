@@ -40,4 +40,20 @@ public class ExampleTest extends BaseTest {
         examplePage.selectSouthAmericaContinent();
         examplePage.assertContinentSouthAmerica();
     }
+
+    @Test
+    public void T0005_ExampleAlertText() {
+        examplePage.clickAlertButton();
+        examplePage.assertTextAlert(
+                "You are submitting information to an external page.\n" +
+                "Are you sure?");
+    }
+
+    @Test
+    public void T0006_ExampleAlertText() {
+        examplePage.clickAlertButton();
+        examplePage.assertTextAlert(
+                "You are submitting information to an external page.\n" +
+                "Are you sure?");
+    }
 }
