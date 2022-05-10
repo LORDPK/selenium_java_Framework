@@ -48,12 +48,4 @@ public class ExampleTest extends BaseTest {
                 "You are submitting information to an external page.\n" +
                 "Are you sure?");
     }
-
-    @Test
-    public void T0006_ExampleAlertText() {
-        examplePage.clickAlertButton();
-        examplePage.assertTextAlert(
-                "You are submitting information to an external page.\n" +
-                "Are you sure?");
-    }
 }
