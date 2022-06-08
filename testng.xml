@@ -13,6 +13,7 @@
                     </include>
                     <include name="T0002_ExampleSendKeyAndClick"/>
                     <include name="T0003_ExampleSelectElement"/>
+                    <include name="T000X_ExampleSQLSelect"/>
                 </methods>
             </class>
         </classes>
