@@ -10,6 +10,8 @@ public class ExamplePage extends BasePage {
     private final By inputFirstName = By.cssSelector("input[name='firstname']");
     private final By sexFemaleRadioButton = By.cssSelector("input[name='sex'][value='Female']");
     private final By selectContinent = By.cssSelector("select[name='continents']");
+    private final By firstRowList = By.cssSelector("div.table > div");
+    private final By AnotherDescriptionRow = By.xpath("//div[@class='table']//div[text()='Another description']");
 
     public ExamplePage(Driver driver) {
         super(driver);
@@ -34,7 +36,6 @@ public class ExamplePage extends BasePage {
         selenium.clickElement(sexFemaleRadioButton);
     }
 
-
     public void selectSouthAmericaContinent() {
        selenium.setElementFromSelectElement(selectContinent, "South America");
     }
@@ -52,5 +53,14 @@ public class ExamplePage extends BasePage {
     public void assertFemaleSelected() {
         boolean FemaleEnabled = selenium.getEnableStateElement(sexFemaleRadioButton);
         Assert.assertTrue(FemaleEnabled, "Error, Female is not selected.");
+    }
+
+    public void assertAnotherDescription() {
+        selenium.ChangeIframe("cp_embed_ZEKwymp");
+        selenium.ChangeIframe("result-iframe");
+        selenium.moveToElementAndClickIt(firstRowList);
+        boolean anotherDescriptionONScreen = selenium.scrollDownUntilElementOnScreen(AnotherDescriptionRow);
+
+        Assert.assertTrue(anotherDescriptionONScreen, "Error, 'Another Description' is not visible on screen.");
     }
 }

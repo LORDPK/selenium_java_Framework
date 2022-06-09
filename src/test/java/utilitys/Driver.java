@@ -4,14 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.time.Duration;
-
+/**
+ * Class for WebDriver instances management. Only one can be created for execution.
+ */
 public class Driver {
     private static Driver single_api = null;
     private static WebDriver webdriver;
     private static String URI;
 
-    private Driver(String URI, String browser) {
+    private Driver(String browser) {
         if((browser.equals("CHROME"))) {
             System.setProperty("webdriver.chrome.driver", "C:\\selenium_drivers\\chromedriver.exe");
             ChromeOptions opt = new ChromeOptions();
@@ -19,13 +20,12 @@ public class Driver {
             opt.addArguments("--incognito");
             webdriver = new ChromeDriver(opt);
             webdriver.manage().window().maximize();
-            webdriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
         }
     }
 
     public static Driver getInstance(String URI, String browser) {
         if (single_api == null)
-            single_api = new Driver(URI, browser);
+            single_api = new Driver(browser);
 
         if(!URI.equals(Driver.URI))
             Driver.URI = URI;
@@ -39,6 +39,10 @@ public class Driver {
 
     public void goToURI() {
         webdriver.navigate().to(URI);
+    }
+
+    public void goToURL(String url) {
+        webdriver.navigate().to(url);
     }
 
     public void closeDriver() {
