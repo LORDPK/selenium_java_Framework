@@ -4,6 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import data.ExecutionConfig;
+import static data.Constants.*;
+
 /**
  * Class for WebDriver instances management. Only one can be created for execution.
  */
@@ -12,9 +15,9 @@ public class Driver {
     private static WebDriver webdriver;
     private static String URI;
 
-    private Driver(String browser) {
-        if((browser.equals("CHROME"))) {
-            System.setProperty("webdriver.chrome.driver", "C:\\selenium_drivers\\chromedriver.exe");
+    private Driver(ExecutionConfig config) {
+        if((config.browser.equals(CHROME))) {
+            System.setProperty("webdriver.chrome.driver", config.ChromeDriverPath);
             ChromeOptions opt = new ChromeOptions();
             opt.addArguments("--no-sandbox");
             opt.addArguments("--incognito");
@@ -23,12 +26,12 @@ public class Driver {
         }
     }
 
-    public static Driver getInstance(String URI, String browser) {
+    public static Driver getInstance(ExecutionConfig config) {
         if (single_api == null)
-            single_api = new Driver(browser);
+            single_api = new Driver(config);
 
-        if(!URI.equals(Driver.URI))
-            Driver.URI = URI;
+        if(!config.URI.equals(Driver.URI))
+            Driver.URI = config.URI;
 
         return single_api;
     }

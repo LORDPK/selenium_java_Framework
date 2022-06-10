@@ -1,5 +1,6 @@
 package tests;
 
+import data.ExecutionConfig;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.*;
@@ -7,11 +8,12 @@ import utilitys.Driver;
 
 public class BaseTest {
     Driver driver;
+    ExecutionConfig exeConfig;
 
     @BeforeTest
-    @Parameters({"URI", "browser"})
-    public void beforeTest(String URI, String browser) {
-        driver = Driver.getInstance(URI, browser);
+    public void beforeTest() {
+        exeConfig = new ExecutionConfig();
+        driver = Driver.getInstance(exeConfig);
     }
 
     @AfterMethod

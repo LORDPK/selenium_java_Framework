@@ -2,7 +2,6 @@ package tests;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.ExamplePage;
 
@@ -20,10 +19,9 @@ public class ExampleTest extends BaseTest {
     }
 
     @Test
-    @Parameters("FileLocalPath")
-    public void T0001_ExampleFileUpload(String fileLocalPath) {
-        examplePage.UploadFile(fileLocalPath);
-        examplePage.assertUploadFile(fileLocalPath);
+    public void T0001_ExampleFileUpload() {
+        examplePage.UploadFile(exeConfig.FileLocalPath);
+        examplePage.assertUploadFile(exeConfig.FileLocalPath);
     }
 
     @Test
@@ -43,7 +41,7 @@ public class ExampleTest extends BaseTest {
 
     @Test
     public void T0004_ExampleScrollDownUntilElementScreen() {
-        driver.goToURL("https://markheath.net/post/simple-tables-with-css-grid-layout");
+        driver.goToURL("https://mharkheat.net/post/simple-tables-with-css-grid-layout");
         examplePage.assertAnotherDescription();
     }
 }

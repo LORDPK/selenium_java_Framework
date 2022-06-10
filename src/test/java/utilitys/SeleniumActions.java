@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import static data.Constants.*;
 
 /**
  * Class for all the actions that uses Selenium WebDriver for Browser Interactions.
@@ -17,9 +17,6 @@ public class SeleniumActions {
     private final WebDriver webDriver;
     private final WebDriverWait wait;
     private final Actions actions;
-    private final java.time.Duration TIMEOUT = Duration.ofSeconds(30);//TODO Move this to a constants class
-    private final long WAITSHORTTIME = 1000;//TODO Move this to a constants class
-    private final long REINTENTLIMIT = 50;//TODO Move this to a constants class
 
     public SeleniumActions(Driver driver) {
         this.driver = driver;
