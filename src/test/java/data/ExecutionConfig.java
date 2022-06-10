@@ -14,6 +14,6 @@ public class ExecutionConfig {
         browser = Constants.CHROME;
         URI = "https://www.tutorialspoint.com/selenium/selenium_automation_practice.htm";
         FileLocalPath = "files/file.txt";
-        ChromeDriverPath = "files/Drivers/chromedriver";
+        ChromeDriverPath = "files/Drivers/chromedriver ";
     }
 }
